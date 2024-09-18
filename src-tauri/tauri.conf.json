@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schema.tauri.app/config/1",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../build"
+  },
+  "package": {
+    "productName": "keshiki",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "execute": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "sh",
+            "cmd": "sh",
+            "args": ["-c", { "validator": ".*" }]
+          }
+        ],
+        "sidecar": false
+      },
+      "os": {
+        "all": true
+      },
+      "dialog": {
+        "message": true
+      },
+      "fs": {
+        "all": false,
+        "scope": ["$HOME/.keshiki", "$HOME/.keshiki/**"],
+        "readDir": true,
+        "readFile": true,
+        "exists": true,
+        "writeFile": true,
+        "createDir": true
+      },
+      "path": {
+        "all": true
+      },
+      "process": {
+        "all": false,
+        "exit": false,
+        "relaunch": false,
+        "relaunchDangerousAllowSymlinkMacos": false
+      },
+      "protocol": {
+        "all": false,
+        "asset": true,
+        "assetScope": ["**", "*/**", "/**"]
+      }
+    },
+    "windows": [
+      {
+        "title": "keshiki",
+        "width": 800,
+        "height": 600
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "sh.crg.keshiki",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    }
+  }
+}
