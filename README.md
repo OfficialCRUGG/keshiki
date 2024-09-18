@@ -6,6 +6,10 @@ A simple yet powerful wallpaper manager for macOS (and Windows soon).
 
 Add your wallpaper directories to `~/.keshiki/directories`. Each line should be a path to a directory containing wallpapers. The directories will be scanned recursively.
 
+## System requirements
+
+This app has been tested against macOS Sonoma, but support should be available for other versions of macOS. Windows support is planned.
+
 ## Keybinds
 
 | Key | Action |
