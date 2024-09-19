@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import DebugWindow from "./DebugWindow.svelte";
-  import DebugWindowItem from "./DebugWindowItem.svelte";
+  import DebugWindow from "./debug/DebugWindow.svelte";
+  import DebugWindowItem from "./debug/DebugWindowItem.svelte";
+  import { debugScroll } from "$lib/state";
 
-  export let debugScroll: boolean = false;
-  export let container: HTMLDivElement | undefined;
+  let container: HTMLDivElement | undefined;
 
   let scrollSpeed = 0;
   let acceleration = 0.5;
@@ -14,7 +14,7 @@
 
   let isUpPressed = false;
   let isDownPressed = false;
-
+  1;
   let animationFrameId: number | null = null;
 
   function handleKeyDown(event: KeyboardEvent) {
@@ -83,7 +83,11 @@
 
 <svelte:window on:keydown={handleKeyDown} on:keyup={handleKeyUp} />
 
-{#if debugScroll}
+<div class="scroll-container" bind:this={container}>
+  <slot />
+</div>
+
+{#if $debugScroll}
   <DebugWindow>
     <DebugWindowItem name="scrollSpeed" value={scrollSpeed} />
     <DebugWindowItem name="acceleration" value={acceleration} />
@@ -94,3 +98,11 @@
     <DebugWindowItem name="isDownPressed" value={isDownPressed} />
   </DebugWindow>
 {/if}
+
+<style>
+  .scroll-container {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+</style>
