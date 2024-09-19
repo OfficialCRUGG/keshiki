@@ -1,10 +1,10 @@
-<div id="empty">
+<div class="empty">
   <span>no wallpapers found</span>
   <span>read the readme for instructions</span>
 </div>
 
 <style>
-  #empty {
+  .empty {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -8,20 +8,9 @@
     modifiersHeld,
     wallpapers,
   } from "$lib/state";
+  import type { Button } from "$lib/types";
   import { setWallpaper } from "$lib/wallpaper";
   import { get } from "svelte/store";
-
-  function randomWallpaper() {
-    if ($wallpapers.length === 0) return;
-    const randomIndex = Math.floor(Math.random() * $wallpapers.length);
-    setWallpaper($wallpapers[randomIndex]);
-  }
-
-  async function loadWallpapers() {
-    loading.set(true);
-    wallpapers.set(await fetchWallpapers());
-    loading.set(false);
-  }
 
   const buttons: Button[] = [
     {
@@ -40,7 +29,9 @@
       longLabel: "_R_andom Wallpaper",
       key: "r",
       action() {
-        randomWallpaper();
+        if ($wallpapers.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * $wallpapers.length);
+        setWallpaper($wallpapers[randomIndex]);
       },
       activeFn() {
         return false;
@@ -50,23 +41,16 @@
       shortLabel: "I",
       longLabel: "_Rescan _I_mages",
       key: "i",
-      action() {
-        loadWallpapers();
+      async action() {
+        loading.set(true);
+        wallpapers.set(await fetchWallpapers());
+        loading.set(false);
       },
       activeFn() {
         return false;
       },
     },
   ];
-
-  type Button = {
-    shortLabel: string;
-    longLabel: string;
-    key?: string;
-    action: () => void;
-    activeFn: () => boolean;
-    active?: boolean;
-  };
 
   buttons.forEach((button) => {
     button.active = button.activeFn();
