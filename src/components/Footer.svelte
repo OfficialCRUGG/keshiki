@@ -39,7 +39,7 @@
     },
     {
       shortLabel: "I",
-      longLabel: "_Rescan _I_mages",
+      longLabel: "Rescan _I_mages",
       key: "i",
       async action() {
         loading.set(true);
