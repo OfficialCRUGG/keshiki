@@ -82,4 +82,4 @@
   }
 </script>
 
-<svelte:window on:keypress={handleKeyPress} />
+<svelte:window on:keydown={handleKeyPress} />
