@@ -1,8 +1,12 @@
 import * as os from "@tauri-apps/api/os";
 import * as dialog from "@tauri-apps/api/dialog";
 import { Command } from "@tauri-apps/api/shell";
+import { invoke } from "@tauri-apps/api";
 
 export async function setWallpaper(filePath: string) {
+  await invoke("set_wallpaper", { path: filePath });
+
+  /*
   const operatingSystem = await os.type();
 
   if (operatingSystem === "Darwin") {
@@ -22,6 +26,7 @@ export async function setWallpaper(filePath: string) {
       type: "error",
     });
   }
+  */
 }
 
 async function runCommand(cmd: string) {
