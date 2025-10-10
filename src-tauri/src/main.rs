@@ -22,7 +22,7 @@ fn set_wallpaper(window: Window, path: String) -> Result<(), String> {
   if os == "macos" {
     wallpaper::macos::set(&path)?;
   } else if os == "windows" {
-    dialog::message(Some(&window), "Error", "Windows is not supported yet.");
+    wallpaper::windows::set(&path)?;
   } else if os == "linux" {
     dialog::message(Some(&window), "Linux support", "Keshiki currently only supports Windows and macOS. Linux support is however planned for the future at some point.")
   }

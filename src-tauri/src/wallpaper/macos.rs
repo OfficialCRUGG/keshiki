@@ -6,15 +6,15 @@ pub fn set(path: &str) -> Result<(), String> {
     path
   );
 
-  let output = Command::new("osascript")
+  let result = Command::new("osascript")
     .arg("-e")
     .arg(script)
     .status()
     .map_err(|err| err.to_string())?;
 
-  if output.success() {
+  if result.success() {
     Ok(())
   } else {
-    Err(String::from("Failed to set wallpaper"))
+    Err("Failed to set wallpaper".into())
   }
 }
