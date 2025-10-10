@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::path::Path;
+mod wallpaper;
 
 use tauri::Manager;
 use tauri::api::dialog;
@@ -20,7 +20,7 @@ fn set_wallpaper(window: Window, path: String) -> Result<(), String> {
   // Get operating system
   let os = std::env::consts::OS;
   if os == "macos" {
-    dialog::message(Some(&window), "Error", "macOS is not supported yet.");
+    wallpaper::macos::set(&path)?;
   } else if os == "windows" {
     dialog::message(Some(&window), "Error", "Windows is not supported yet.");
   } else if os == "linux" {
